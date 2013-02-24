@@ -48,13 +48,10 @@ JsPDFDocument::JsPDFDocument() {
 }
 
 JsPDFDocument::~JsPDFDocument() {
-	delete this->worker;
 	if(this->document != NULL)
 		delete this->document;
 	uv_mutex_destroy(&this->mutex);
 }
-
-
 
 void JsPDFDocument::onStateChange(WorkerState state) {
 	switch(state) {
