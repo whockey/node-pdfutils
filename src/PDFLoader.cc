@@ -10,7 +10,6 @@ using namespace node;
 PDFLoader::PDFLoader(JsPDFDocument* document, const Arguments& args) {
 	this->document = document;
 	this->source = Persistent<Value>::New(args[0]);
-	this->callback = Persistent<Function>::New(Handle<Function>::Cast(args[1]));
 
 	if(this->source->IsString()) {
 		this->sourceStr.Set(*String::Utf8Value(this->source));
@@ -20,7 +19,12 @@ PDFLoader::PDFLoader(JsPDFDocument* document, const Arguments& args) {
 		this->sourceStr.clear();
 	}
 
-	this->document->worker->enqueue(this);
+	if(args.Length() >= 2 && args[1]->IsFunction()) {
+		this->callback = Persistent<Function>::New(Handle<Function>::Cast(args[1]));
+		this->document->worker->enqueue(this);
+	}
+	else
+		this->execSync();
 }
 
 void PDFLoader::exec() {
@@ -53,6 +57,9 @@ void PDFLoader::loadProperties() {
 }
 
 void PDFLoader::execCallback() {
+	if(this->callback.IsEmpty())
+		return;
+
 	Local<Value> argv[] = {
 		this->tmpDoc == NULL || this->tmpDoc->isOk() == false
 			? Exception::Error(String::New("Error loading document"))

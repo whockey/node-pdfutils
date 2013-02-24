@@ -8,12 +8,14 @@
 class NodePDFDocBuilder : public PDFDocBuilder {
 	public:
 		NodePDFDocBuilder(v8::Persistent<v8::Value> source);
-		~NodePDFDocBuilder() {}
+		~NodePDFDocBuilder();
 
 		PDFDoc *buildPDFDoc(const GooString &uri, GooString *ownerPassword = NULL,
 				GooString *userPassword = NULL, void *guiDataA = NULL);
 		GBool supports(const GooString &uri);
 
+	private: 
+		v8::Persistent<v8::Value> source;
 };
 
 #endif /* STREAMPDFDOCBUILDER_H */

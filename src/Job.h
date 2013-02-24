@@ -5,6 +5,10 @@ class Job {
 	public:
 		virtual void exec() = 0;
 		virtual void after() = 0;
+		inline void execSync() {
+			exec();
+			after();
+		}
 };
 
 #endif

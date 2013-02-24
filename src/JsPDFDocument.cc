@@ -35,7 +35,7 @@ Handle<Value> JsPDFDocument::New(const Arguments& args) {
 	Handle<v8::Object> jsThis = args.This();
 	dc->Wrap(jsThis);
 
-	if(args.Length() != 0)
+	if(args.Length() >= 1 && args[0]->IsString())
 		new PDFLoader(dc, args);
 
 	return scope.Close(jsThis);
