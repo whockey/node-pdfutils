@@ -1,9 +1,13 @@
 REPORTER = spec
 
-build:
-	@node-gyp configure build
+all: compile
 
-all: build
+build:
+	@node-gyp configure
+
+compile: build
+	@node-gyp build
+
 
 clean:
 	@node-gyp clean
@@ -11,4 +15,4 @@ clean:
 test: build
 	@node_modules/mocha/bin/mocha --reporter $(REPORTER)
 
-.PHONY: test clean all build
+.PHONY: test clean all compile
