@@ -43,5 +43,8 @@ describe('PDFDocument', function(){
 	it('#length', function() {
 		var doc = new PDFDocument(simpleTextPath);
 		assert.equal(1, doc.length);
+		(function(){
+			doc.length = 5;
+		}).should.throw();
 	})
 });
