@@ -1,5 +1,5 @@
-all:
-	cd ..; node-gyp --verbose build
+all: 
+	@make -C .. $@
 
-test:
-	@echo Yay
+%:
+	@make -C .. $@
