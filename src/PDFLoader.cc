@@ -42,6 +42,7 @@ void PDFLoader::loadPages() {
 	Persistent<v8::Object> handle = this->document->handle_;
 
 	int length = this->tmpDoc->getNumPages();
+	handle->Set(String::NewSymbol("length"), Number::New(length));
 	for(; i < length; i++) {
 		std::stringstream istr;
 		istr << i;

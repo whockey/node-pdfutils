@@ -4,6 +4,7 @@
 		"sources": [
 			"src/init.cc",
 			"src/JsPDFDocument.cc",
+			"src/JsPDFPage.cc",
 			"src/JobWorker.cc",
 			"src/PDFLoader.cc",
 			"src/NodePDFDocBuilder.cc"

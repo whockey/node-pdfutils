@@ -2,6 +2,7 @@ var assert = require("should")
 
 var pdfutils = require("../lib/pdfutils.js");
 var PDFDocument = pdfutils.PDFDocument;
+var PDFPage = pdfutils.PDFPage;
 var simpleTextPath = __dirname + "/simpleText.pdf"
 
 describe('PDF Utils', function(){
@@ -43,8 +44,30 @@ describe('PDFDocument', function(){
 	it('#length', function() {
 		var doc = new PDFDocument(simpleTextPath);
 		assert.equal(1, doc.length);
-		(function(){
-			doc.length = 5;
-		}).should.throw();
-	})
+	});
+	it('#author', function() {
+		var doc = new PDFDocument(simpleTextPath);
+		doc.should.have.property("author");
+	});
+	it('#creationDate', function() {
+		var doc = new PDFDocument(simpleTextPath);
+		doc.should.have.property("creationDate");
+		doc.creationDate.should.be.a('number');
+	});
+	it('#push', function() {
+		var doc = new PDFDocument(simpleTextPath);
+		doc.push.should.be.a('function');
+		doc.push(doc[0]);
+		assert.equal(2, doc.length);
+	});
 });
+
+describe('PDFPage', function() {
+	var page = new PDFDocument(simpleTextPath)[0];
+	it('should be PDFPage', function() {
+		page.should.be.instanceof(PDFPage);
+	})
+	it('#index', function() {
+		page.should.have.property('index', 0);
+	})
+})
