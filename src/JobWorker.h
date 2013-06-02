@@ -35,7 +35,7 @@ class JobWorker : public JobWorkerListener {
 		void flushFinished();
 		static void Worker(uv_work_t *req);
 		static void Update(uv_async_t *handle, int status /*UNUSED*/);
-		static void AfterWorker(uv_work_t *req, int status);
+		static void AfterWorker(uv_work_t *req, int status /*UNUSED*/);
 
 		void onStateChange(WorkerState state) {};
 };
