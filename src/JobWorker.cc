@@ -86,7 +86,7 @@ void JobWorker::Update(uv_async_t *handle, int status /*UNUSED*/) {
 	self->flushFinished();
 }
 
-void JobWorker::AfterWorker(uv_work_t *req) {
+void JobWorker::AfterWorker(uv_work_t *req, int status) {
 	JobWorker *self = (JobWorker *)req->data;
 	if(self == NULL)
 		return;
