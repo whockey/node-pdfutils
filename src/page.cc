@@ -5,6 +5,7 @@
 #include <cairo.h>
 #include <cairo-svg.h>
 #include <string.h> 
+#include <stdio.h>
 #include <sstream>
 #include <algorithm>
 #include "page.h"

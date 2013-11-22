@@ -4,6 +4,7 @@
 #include <poppler.h>
 #include <stdlib.h>
 #include <strings.h>
+#include <stdio.h>
 #include <cairo.h>
 #include <cairo-svg.h>
 #include <unistd.h>
